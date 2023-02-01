@@ -1,0 +1,15 @@
+RegisterCommand("loadinggg", function()
+    print("testconfirmed")
+end)
+
+Citizen.CreateThread(function()
+    DisplayRadar(false)
+    DisplayHud(false)
+    StartPlayerSwitch(PlayerPedId(), PlayerPedId(), 255, 1)
+    TriggerEvent("cS.GameFeed", "Welcome to Glow's Development Server!", "Welcome!", "This server isn't much, it where all my development is done! You can press F1 to bring up my own personal menu!\n\nYou can also bring up vMenu by pressing M.\n\nIf you want to help test Niels Diamond Casino Heist, you can fast travel to the casino by pressing F1 and then Fast Travel\n\nCurrent Project: Fleeca Bank Remake", "v_73_fib01_txd", "xj_v_fibscreen", false, 23, false)
+    Citizen.Wait(25000) 
+    StopPlayerSwitch()
+    DisplayRadar(true)
+    DisplayHud(true)
+end)
+

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CMapTypes>
+  <archetypes>
+    <Item type="CBaseArchetypeDef">
+      <lodDist value="60" />
+      <flags value="32" />
+      <specialAttribute value="0" />
+      <bbMin x="-238.13605" y="-237.5381" z="-45.02073" />
+      <bbMax x="239.40845" y="237.5381" z="45.076138" />
+      <bsCentre x="0.63619995" y="0.0" z="0.027704239" />
+      <bsRadius value="339.80273" />
+      <hdTextureDist value="40" />
+      <name>torus</name>
+      <textureDictionary>torus</textureDictionary>
+      <physicsDictionary>torus</physicsDictionary>
+      <assetType>ASSET_TYPE_DRAWABLE</assetType>
+      <assetName>torus</assetName>
+    </Item>
+  </archetypes>
+  <name>torus</name>
+</CMapTypes>
