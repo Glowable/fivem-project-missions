@@ -66,7 +66,7 @@ AddEventHandler("glow:cutsceneleave", function()
         Wait(0)
     end
 
-    fadeshortlong()
+    fadeshortlongg()
 end)
 
 
