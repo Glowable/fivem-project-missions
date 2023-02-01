@@ -6,6 +6,7 @@ end)
 
 RegisterNetEvent("glow:startcayo")
 AddEventHandler("glow:startcayo", function()
+    TriggerEvent("mt:missiontext", "Go to ~y~Los Santos International Airport", 500000)
     local ped = PlayerPedId()
     local blip = AddBlipForCoord(-1037.75, -2736.93, 20.17)
     SetBlipSprite(blip, 1)
@@ -36,10 +37,15 @@ AddEventHandler("glow:arrivelsia", function()
         alert("∑ Press ~INPUT_PICKUP~ to board the ~b~Plane ~s~and travel to ~b~Cayo Perico")
         if IsControlJustReleased(38,  e_key --[[ H key ]]) then
             TriggerEvent("glow:cayocam1")
+            TriggerEvent("mt:missiontext", "", 500000)
             break
             
         end
     end
+end)
+
+RegisterCommand("step2cayo", function()
+    TriggerEvent("glow:cutsceneleave")
 end)
 
 RegisterNetEvent("glow:cutsceneleave")
@@ -66,8 +72,12 @@ AddEventHandler("glow:cutsceneleave", function()
         Wait(0)
     end
 
-    fadeshortlongg()
+    DoScreenFadeOut(20)
+    TriggerEvent("glow:planesequence")
+    Citizen.Wait(6000)
+    DoScreenFadeIn(1000)
 end)
+
 
 
 
@@ -97,7 +107,55 @@ AddEventHandler( "glow:cayocam1", function()
     TriggerEvent("glow:cutsceneleave")
 end)
 
+RegisterNetEvent( "glow:spawnplane" )
+AddEventHandler( "glow:spawnplane", function()
+    local vehicleName = 'nimbus'
 
+    if not IsModelInCdimage(vehicleName) or not IsModelAVehicle(vehicleName) then
+        TriggerEvent('chat:addMessage', {
+            args = {'Vehicle not recognised: ' .. vehicleName}
+        })
+        return
+    end
+
+    RequestModel(vehicleName)
+
+    while not HasModelLoaded(vehicleName) do
+        Citizen.Wait(500)
+    end
+
+    local playerPed = PlayerPedId()
+    local pos = GetEntityCoords(playerPed)
+
+    local vehicle = CreateVehicle(vehicleName, pos.x, pos.y, pos.z, 200.87, true, false)
+    SetPedIntoVehicle(PlayerPedId(), vehicle, -1) 
+	vehicle = AddBlipForEntity(vehicle)
+	SetBlipSprite(carBlip,number)
+
+	if GetEntityHealth(vehicle) == 0 then
+		SetEntityAsNoLongerNeeded(vehicle)
+		RemoveBlip(carBlip)
+		blip = nil
+	end
+
+    SetModelAsNoLongerNeeded(vehicleName)
+end, false)
+
+RegisterCommand("startflying", function()
+    TriggerEvent("glow:planesequence")
+end)
+
+RegisterNetEvent( "glow:planesequence" )
+AddEventHandler( "glow:planesequence", function()
+    SetEntityCoords(PlayerPedId(), 4164.47, -2548.39, 526.66, 200.87, true, true, true, false)
+    TriggerEvent("glow:spawnplane")
+    TriggerEvent("glow:aifly")
+end)
+RegisterNetEvent( "glow:aifly" )
+AddEventHandler( "glow:aifly", function()
+    local playerPed = GetPlayerPed(-1) 
+        TaskPlaneMission(playerPed, GetVehiclePedIsIn(PlayerPedId(), false), 0, 0, 5178.2, -5980.21, 365.19, 4, GetVehicleModelMaxSpeed(`nimbus`), 1.0, 238.0, 360.0, 370.0)
+end)
 
 
 
