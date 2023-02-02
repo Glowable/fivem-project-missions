@@ -1,3 +1,5 @@
+local NPC = { x = -2962.72, y = 483.09, z = 15.7, rotation = 268, NetworkSync = true}
+
 
 RegisterCommand("startcayomis", function()
     TriggerEvent("glow:startcayo")
@@ -36,7 +38,7 @@ AddEventHandler("glow:arrivelsia", function()
         Citizen.Wait(1)
         alert("∑ Press ~INPUT_PICKUP~ to board the ~b~Plane ~s~and travel to ~b~Cayo Perico")
         if IsControlJustReleased(38,  e_key --[[ H key ]]) then
-            TriggerEvent("glow:cayocam1")
+            cayocam1()
             TriggerEvent("mt:missiontext", "", 500000)
             break
             
@@ -48,117 +50,14 @@ RegisterCommand("step2cayo", function()
     TriggerEvent("glow:cutsceneleave")
 end)
 
-RegisterNetEvent("glow:cutsceneleave")
-AddEventHandler("glow:cutsceneleave", function()
-    RequestCutscene('hs4_lsa_take_nimb2', 128, 64) -- Usually 8.
-    
-    while not (HasCutsceneLoaded()) do
-        Wait(0)
-    end
-    -- Sets current player ped as cutscene mp ped.
-    SetCutsceneEntityStreamingFlags('MP_1', 0, 1)
-    RegisterEntityForCutscene(PlayerPedId(), 'MP_1', 0, 0, 64)
 
-    StartCutscene(0)
-    -- Waiting for the cutscene to spawn the mp ped.
-    while not (DoesCutsceneEntityExist('MP_1', 0)) do
-        Wait(0)
-    end
 
-    -- Set the clothing you want on the cutscene ped.
-    SetPedComponentVariation(PlayerPedId(), componentId, drawableId, textureId, paletteId)
-
-    while not (HasCutsceneFinished()) do
-        Wait(0)
-    end
-
-    DoScreenFadeOut(20)
-    TriggerEvent("glow:planesequence")
-    Citizen.Wait(6000)
-    DoScreenFadeIn(1000)
+RegisterCommand("spawnlol", function()
+    spawnplane()
 end)
 
 
 
-
-RegisterNetEvent( "glow:cayocam1" )
-AddEventHandler( "glow:cayocam1", function()
-    cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-    SetCamCoord(cam, -1039.14, -2730.64, 24.6, 345)
-    SetCamRot(cam, 0.1, 0.0, 180.01, 5)
-    SetCamActive(cam, true)
-    RenderScriptCams(true, true, 1000, true, false)
-    DisplayRadar(false)
-    DisplayHud(false)
-
-    local playerPed = GetPlayerPed(-1) 
- 
-    local coords = { x = -1045.14, y = -2750.44, z = 21.36, heading = 88.09 }
-    TaskGoStraightToCoord(playerPed, coords.x, coords.y, coords.z,1.0,8000,88.67,0)
-    Citizen.Wait(8000)
-    ClearPedTasks(PlayerPedId())
-    DoScreenFadeOut(500)
-    DisplayRadar(true)
-    DisplayHud(true)
-    RenderScriptCams(false, true, 1000, true, false)
-    DestroyCam(cam, true)
-    Citizen.Wait(6000)
-    DoScreenFadeIn(500)
-    TriggerEvent("glow:cutsceneleave")
-end)
-
-RegisterNetEvent( "glow:spawnplane" )
-AddEventHandler( "glow:spawnplane", function()
-    local vehicleName = 'nimbus'
-
-    if not IsModelInCdimage(vehicleName) or not IsModelAVehicle(vehicleName) then
-        TriggerEvent('chat:addMessage', {
-            args = {'Vehicle not recognised: ' .. vehicleName}
-        })
-        return
-    end
-
-    RequestModel(vehicleName)
-
-    while not HasModelLoaded(vehicleName) do
-        Citizen.Wait(500)
-    end
-
-    local playerPed = PlayerPedId()
-    local pos = GetEntityCoords(playerPed)
-
-    local vehicle = CreateVehicle(vehicleName, pos.x, pos.y, pos.z, 200.87, true, false)
-    SetPedIntoVehicle(PlayerPedId(), vehicle, -1) 
-	vehicle = AddBlipForEntity(vehicle)
-	SetBlipSprite(carBlip,number)
-
-	if GetEntityHealth(vehicle) == 0 then
-		SetEntityAsNoLongerNeeded(vehicle)
-		RemoveBlip(carBlip)
-		blip = nil
-	end
-
-    SetModelAsNoLongerNeeded(vehicleName)
-end, false)
-
-RegisterCommand("startflying", function()
-    TriggerEvent("glow:planesequence")
-end)
-
-RegisterNetEvent( "glow:planesequence" )
-AddEventHandler( "glow:planesequence", function()
-    SetEntityCoords(PlayerPedId(), 4164.47, -2548.39, 526.66, 200.87, true, true, true, false)
-    TriggerEvent("glow:spawnplane")
-    TriggerEvent("glow:aifly")
-    Citizen.Wait(2000)
-    TriggerEvent("cS.MidsizeBanner", "~r~PREPARE TO JUMP", "", 5, 9, true)
-end)
-RegisterNetEvent( "glow:aifly" )
-AddEventHandler( "glow:aifly", function()
-
-    local playerPed = GetPlayerPed(-1) 
-        TaskPlaneMission(playerPed, GetVehiclePedIsIn(PlayerPedId(), false), 0, 0, 5178.2, -5980.21, 365.19, 4, GetVehicleModelMaxSpeed(`nimbus`), 1.0, 238.0, 360.0, 370.0)
-end)
 
 
 
