@@ -36,7 +36,7 @@ AddEventHandler("glow:arrivelsia", function()
     local e_key = 38
     while true do
         Citizen.Wait(1)
-        alert("∑ Press ~INPUT_PICKUP~ to board the ~b~Plane ~s~and travel to ~b~Cayo Perico")
+        alert("∑ Press ~INPUT_PICKUP~ to board the ~b~Plane ~s~and travel to ~g~Cayo Perico")
         if IsControlJustReleased(38,  e_key --[[ H key ]]) then
             cayocam1()
             TriggerEvent("mt:missiontext", "", 500000)
