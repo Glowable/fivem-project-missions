@@ -28,3 +28,5 @@ AddEventHandler("mt:missiontext", function(text, time)
     DrawSubtitleTimed(time, 1)
 end)
 
+
+
