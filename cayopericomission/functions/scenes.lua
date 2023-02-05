@@ -65,7 +65,7 @@ AddEventHandler("glow:missionland", function()
     TriggerEvent("mt:missiontext", "Jump out the ~g~Plane ~s~and land on ~b~Cayo Perico", 500000)
 end)
 
-local NPC = { x = -2962.72, y = 483.09, z = 15.7, rotation = 268, NetworkSync = true}
+
 
 
 
