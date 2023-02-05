@@ -55,17 +55,56 @@ function spawnplane()
 end
 
 RegisterCommand("spawnlol", function()
-    pickup = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
+    pickup1 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
+    pickup2 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
+    pickup3 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
+    pickup4 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
+
     local blip = AddBlipForCoord(-739.64, -15.14, 38.3)
     SetBlipSprite(blip, 514)
     SetBlipColour(blip, 1)
     SetBlipRoute(blip, true)
-    while not HasPickupBeenCollected(pickup) do
+
+    totalPickups = 0
+
+    while true do
+
+        if HasPickupBeenCollected(pickup1) do
+            totalPickups = totalPickups + 1
+
+            print("hello")
+            notify("You have collected a ~r~Cocaine Package.")
+        end
+
+        if HasPickupBeenCollected(pickup2) do
+            totalPickups = totalPickups + 1
+
+            print("hello")
+            notify("You have collected a ~r~Cocaine Package.")
+        end
+
+        if HasPickupBeenCollected(pickup3) do
+            totalPickups = totalPickups + 1
+
+            print("hello")
+            notify("You have collected a ~r~Cocaine Package.")
+        end
+
+        if HasPickupBeenCollected(pickup4) do
+            totalPickups = totalPickups + 1
+
+            print("hello")
+            notify("You have collected a ~r~Cocaine Package.")
+        end
+
+        if totalPickups == 4 do
+            print("all collected")
+            break
+        end
+
         Citizen.Wait(0)
     end
+
     
-    
-    print("hello")
-    notify("You have collected a ~r~Cocaine Package.")
     RemoveBlip(blip)
 end)
