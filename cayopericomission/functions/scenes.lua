@@ -66,7 +66,28 @@ AddEventHandler("glow:missionland", function()
 end)
 
 
-
+function arrivedtodrug()
+    TriggerEvent("mt:missiontext", "Go to the ~y~Port", 500000)
+    local ped = PlayerPedId()
+    local blip = AddBlipForCoord(4984.2, -5193.32, 2.5)
+    SetBlipSprite(blip, 1)
+    SetBlipColour(blip, 5)
+    SetBlipRoute(blip, true)
+    local inArea = false
+    local coords
+    local dist
+    while not inArea do
+        Wait(0)
+        coords = GetEntityCoords(ped)
+        dist = #(coords - vector3(4984.2, -5193.32, 2.5))
+        if dist < 140.6 then
+            inArea = true
+            print("done")
+            RemoveBlip(blip)
+            spawncocaine()
+        end
+    end
+end
 
 
 function jumpoutplane()

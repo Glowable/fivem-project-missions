@@ -7,7 +7,7 @@ function spawnplane()
          Wait(1)
     end
   
-      pilot = CreatePed(0, modelHash , NPC.x,NPC.y,NPC.z - 1, NPC.rotation, NPC.NetworkSync)
+      pilot = CreatePed(0, modelHash , 1.1, 2.3, 4.5 - 1, 20.1, true)
       SetEntityInvincible(pilot, true)
       
 
@@ -54,51 +54,78 @@ function spawnplane()
 
 end
 
-RegisterCommand("spawnlol", function()
-    pickup1 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
-    pickup2 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
-    pickup3 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
-    pickup4 = CreatePickup(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), -739.64, -15.14, 38.3)
+function spawncocaine()
 
-    local blip = AddBlipForCoord(-739.64, -15.14, 38.3)
-    SetBlipSprite(blip, 514)
-    SetBlipColour(blip, 1)
-    SetBlipRoute(blip, true)
+    pickup1 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 4924.5, -5245.88, 2.60, 180.1, 180.1, 210.1)
+    pickup2 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 4836.01, -5173.27, 1.42, 90.1, 180.1, 90.1)
+    pickup3 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 4962.65, -5106.74, 3.11, 180.1, 180.1, 150.1)
+    pickup4 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 5001.67, -5190.77, 2.9, 90.1, 180.1, 90.1)
+
+    local blip1 = AddBlipForCoord(4924.5, -5245.88, 2.70)
+    local blip2 = AddBlipForCoord(4836.01, -5173.27, 2.12)
+    local blip3 = AddBlipForCoord(4962.65, -5106.74, 3.91)
+    local blip4 = AddBlipForCoord(5001.67, -5190.77, 2.9)
+    SetBlipSprite(blip1, 514)
+    SetBlipSprite(blip2, 514)
+    SetBlipSprite(blip3, 514)
+    SetBlipSprite(blip4, 514)
+    SetBlipColour(blip1, 3)
+    SetBlipColour(blip2, 3)
+    SetBlipColour(blip3, 3)
+    SetBlipColour(blip4, 3)
+    SetBlipRoute(blip1, false)
+    SetBlipRoute(blip2, false)
+    SetBlipRoute(blip3, false)
+    SetBlipRoute(blip4, false)
 
     totalPickups = 0
 
     while true do
 
-        if HasPickupBeenCollected(pickup1) do
+        if HasPickupBeenCollected(pickup1) then
             totalPickups = totalPickups + 1
 
-            print("hello")
-            notify("You have collected a ~r~Cocaine Package.")
+
+            print(totalPickups)
+            TriggerEvent("cS.MidsizeBanner", "~b~PACKAGE COLLECTED~w~", "", 5, 9, true)
+            notify("You have collected a ~b~Cocaine Package.")
+            RemoveBlip(blip1)
         end
 
-        if HasPickupBeenCollected(pickup2) do
+        if HasPickupBeenCollected(pickup2) then
             totalPickups = totalPickups + 1
 
-            print("hello")
-            notify("You have collected a ~r~Cocaine Package.")
+
+            print(totalPickups)
+            TriggerEvent("cS.MidsizeBanner", "~b~PACKAGE COLLECTED~w~", "", 5, 9, true)
+            notify("You have collected a ~b~Cocaine Package.")
+            RemoveBlip(blip2)
         end
 
-        if HasPickupBeenCollected(pickup3) do
+        if HasPickupBeenCollected(pickup3) then
             totalPickups = totalPickups + 1
 
-            print("hello")
-            notify("You have collected a ~r~Cocaine Package.")
+
+            print(totalPickups)
+            TriggerEvent("cS.MidsizeBanner", "~b~PACKAGE COLLECTED~w~", "", 5, 9, true)
+            notify("You have collected a ~b~Cocaine Package.")
+            RemoveBlip(blip3)
         end
 
-        if HasPickupBeenCollected(pickup4) do
+        if HasPickupBeenCollected(pickup4) then
             totalPickups = totalPickups + 1
 
-            print("hello")
-            notify("You have collected a ~r~Cocaine Package.")
+
+            print(totalPickups)
+            TriggerEvent("cS.MidsizeBanner", "~b~PACKAGE COLLECTED~w~", "", 5, 9, true)
+            notify("You have collected a ~b~Cocaine Package.")
+            RemoveBlip(blip4)
         end
 
-        if totalPickups == 4 do
+        if totalPickups == 4 then
             print("all collected")
+            TriggerEvent("cS.MidsizeBanner", "~b~PACKAGE COLLECTED~w~", "", 5, 9, true)
+            alert("~r~COLLECTED!!!")
             break
         end
 
@@ -107,4 +134,4 @@ RegisterCommand("spawnlol", function()
 
     
     RemoveBlip(blip)
-end)
+end

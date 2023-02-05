@@ -57,7 +57,10 @@ end)
 
 
 
-
+RegisterCommand("stage2cocaine", function()
+    alert("~r~Police ~w~has seized the ~y~Port. ~w~Shoot your way through to steal the ~b~Cocaine")
+    arrivedtodrug()
+end)
 
 
 

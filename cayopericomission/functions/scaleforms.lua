@@ -218,6 +218,3 @@ function DrawTeamlives()
 end
 
 
-RegisterCommand("teamlives", function()
-    DrawTeamlives()
-end)
