@@ -54,10 +54,6 @@ end)
 
 
 
-RegisterCommand("spawnlol", function()
-    spawnplane()
-end)
-
 
 
 

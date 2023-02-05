@@ -16,7 +16,7 @@ function startRaceIntro()
     end
   
     callAll("CREATE_STAT_WALL", "intro", "HUD_COLOUR_BLACK", -1)
-    callAll("ADD_INTRO_TO_WALL", "intro", "type_mission", "The Fleeca Bank Heist", "", "", "", "", "", false, "HUD_COLOUR_GREYLIGHT")
+    callAll("ADD_INTRO_TO_WALL", "intro", "type_mission", "UNKNOWN NAME IDK", "", "", "", "", "", false, "HUD_COLOUR_GREYLIGHT")
     AddTextEntry("type_mission", "Mission")
     callAll("ADD_BACKGROUND_TO_WALL", "intro", 70, 18)
     callAll("SHOW_STAT_WALL", "intro")
