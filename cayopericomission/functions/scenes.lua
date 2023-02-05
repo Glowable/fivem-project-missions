@@ -56,7 +56,8 @@ function cutscene1()
     Citizen.Wait(500)
     startRaceIntro()
     Citizen.Wait(7000)
-    jumpoutplane()
+    arrivedtodrug()
+    spawnoptionalvehicle()
     TriggerEvent("glow:missionland")
 end
 

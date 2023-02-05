@@ -135,3 +135,44 @@ function spawncocaine()
     
     RemoveBlip(blip)
 end
+
+function spawnoptionalvehicle()
+    print("optional vehicle spawned")
+    alert("A vehicle is recommended for this Mission, Lester has sourced you one on your minimap")
+
+    local vehicleName = 'vagrant'
+
+    if not IsModelInCdimage(vehicleName) or not IsModelAVehicle(vehicleName) then
+        TriggerEvent('chat:addMessage', {
+            args = {'Vehicle not recognised: ' .. vehicleName}
+        })
+        return
+    end
+
+    RequestModel(vehicleName)
+    while not HasModelLoaded(vehicleName) do
+        Citizen.Wait(500)
+    end
+
+    local playerPed = PlayerPedId()
+    local pos = GetEntityCoords(playerPed)
+
+    local vehicle = CreateVehicle(vehicleName, 5121.13, -4564.68, 3.7, 200.87, true, false)
+	vehicle = AddBlipForEntity(vehicle)
+	SetBlipSprite(vehicle, 225)
+    SetBlipColour(vehicle, 5)
+    
+
+	if GetEntityHealth(vehicle) == 0 then
+		SetEntityAsNoLongerNeeded(vehicle)
+		RemoveBlip(carBlip)
+		blip = nil
+	end
+    Citizen.Wait(3000)
+
+    Citizen.Wait(6000)
+
+
+
+
+end
