@@ -23,6 +23,15 @@ function cayocam1()
     cutscene1()
 end
 
+RegisterCommand("aftercutscene", function()
+    cutscene1()
+end)
+
+RegisterCommand("cinematicshot", function()
+    local player = PlayerPedId()
+    CreateCinematicShot(`CAMERA_MAN_SHOT`, 10000, player,player)
+end)
+
 function cutscene1()
     RequestCutscene('hs4_lsa_take_nimb2', 128, 64) -- Usually 8.
     
@@ -52,19 +61,18 @@ function cutscene1()
     DoScreenFadeOut(20)
     spawnplane()
     Citizen.Wait(6000)
+    local player = PlayerPedId()
+    CreateCinematicShot(`CAMERA_MAN_SHOT`, 10000, player,player)
     DoScreenFadeIn(1000)
     Citizen.Wait(500)
     startRaceIntro()
-    Citizen.Wait(7000)
+    Citizen.Wait(4000)
+    TriggerEvent("glow:optionalvehicle")
     arrivedtodrug()
-    spawnoptionalvehicle()
     TriggerEvent("glow:missionland")
 end
 
-RegisterNetEvent("glow:missionland")
-AddEventHandler("glow:missionland", function()
-    TriggerEvent("mt:missiontext", "Jump out the ~g~Plane ~s~and land on ~b~Cayo Perico", 500000)
-end)
+
 
 
 function arrivedtodrug()
@@ -94,3 +102,7 @@ end
 function jumpoutplane()
     alert("Press ~INPUT_VEH_EXIT~ to jump out the Plane")
 end
+
+RegisterCommand("spawnoptional", function()
+    spawnoptionalvehicle()
+end)

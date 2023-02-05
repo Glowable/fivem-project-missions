@@ -8,7 +8,6 @@ function spawnplane()
     end
   
       pilot = CreatePed(0, modelHash , 1.1, 2.3, 4.5 - 1, 20.1, true)
-      SetEntityInvincible(pilot, true)
       
 
 
@@ -35,19 +34,8 @@ function spawnplane()
     SetPedIntoVehicle(pilot, vehicle, -1)  
     SetPedIntoVehicle(PlayerPedId(), vehicle, 0)
     TaskPlaneMission(pilot, GetVehiclePedIsIn(pilot, false), 0, 0, 5178.2, -5980.21, 365.19, 4, GetVehicleModelMaxSpeed(`velum`), 1.0, 238.0, 360.0, 370.0)
-	vehicle = AddBlipForEntity(vehicle)
-	SetBlipSprite(vehicle, 1)
-    SetBlipColour(vehicle, 2)
-    
 
-	if GetEntityHealth(vehicle) == 0 then
-		SetEntityAsNoLongerNeeded(vehicle)
-		RemoveBlip(carBlip)
-		blip = nil
-	end
-    Citizen.Wait(3000)
 
-    Citizen.Wait(6000)
 
 
 
@@ -55,7 +43,7 @@ function spawnplane()
 end
 
 function spawncocaine()
-
+    TriggerEvent("mt:missiontext", "Steal the ~b~Cocaine", 500000)
     pickup1 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 4924.5, -5245.88, 2.60, 180.1, 180.1, 210.1)
     pickup2 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 4836.01, -5173.27, 1.42, 90.1, 180.1, 90.1)
     pickup3 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 4962.65, -5106.74, 3.11, 180.1, 180.1, 150.1)
@@ -136,9 +124,10 @@ function spawncocaine()
     RemoveBlip(blip)
 end
 
-function spawnoptionalvehicle()
+RegisterNetEvent("glow:optionalvehicle")
+AddEventHandler("glow:optionalvehicle", function()
     print("optional vehicle spawned")
-    alert("A vehicle is recommended for this Mission, Lester has sourced you one on your minimap")
+    alert("Press ~INPUT_VEH_EXIT~ to jump out the Vehicle. A ~y~vehicle ~w~is recommended and has been sourced")
 
     local vehicleName = 'vagrant'
 
@@ -175,4 +164,4 @@ function spawnoptionalvehicle()
 
 
 
-end
+end)
