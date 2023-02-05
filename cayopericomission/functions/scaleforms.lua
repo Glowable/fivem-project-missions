@@ -16,8 +16,8 @@ function startRaceIntro()
     end
   
     callAll("CREATE_STAT_WALL", "intro", "HUD_COLOUR_BLACK", -1)
-    callAll("ADD_INTRO_TO_WALL", "intro", "some_label", "The Fleeca Bank Heist", "some_label", "", "", "", "", false, "HUD_COLOUR_GREYLIGHT")
-    AddTextEntry("some_label", "IM A TEST LOL")
+    callAll("ADD_INTRO_TO_WALL", "intro", "type_mission", "The Fleeca Bank Heist", "", "", "", "", "", false, "HUD_COLOUR_GREYLIGHT")
+    AddTextEntry("type_mission", "Mission")
     callAll("ADD_BACKGROUND_TO_WALL", "intro", 70, 18)
     callAll("SHOW_STAT_WALL", "intro")
     local startTime = GetGameTimer()
@@ -168,3 +168,56 @@ end
 function scaleform:IsValid()
 	return self and true or false
 end
+
+seconds = 5
+
+function DrawTeamlives()
+
+    AddTextEntry("time", "TIME REMAINING")
+
+    CreateThread(function() 
+        while true do 
+            Wait(0)
+
+            if seconds < 1 then 
+                SetTextColour(170, 40, 40, 255)
+            end
+
+            SetTextScale(0.28, 0.28)
+            BeginTextCommandDisplayText("time")
+            EndTextCommandDisplayText(0.853, 0.954)
+            
+            if seconds < 1 then 
+                SetTextColour(170, 40, 40, 255)
+                DrawSprite("seconds", "all_red_bg", 0.8455, 0.962, 0.29, 0.035, 0.0, 79, 12, 12, 300)
+            else 
+                DrawSprite("seconds", "all_black_bg", 0.915, 0.962, 0.15, 0.035, 0.0, 100, 100, 100, 150)
+            end
+
+            SetTextScale(0.47, 0.47)
+            BeginTextCommandDisplayText("NUMBER")
+            AddTextComponentInteger(seconds)
+            EndTextCommandDisplayText(0.977, 0.945)
+        end
+    end)
+
+    gametime = GetGameTimer()
+    printtime = seconds
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(0)
+            if printtime > 0 then
+                diftime = GetGameTimer() - gametime
+                printtime = math.floor(seconds - (diftime/1000))
+                print("testlol")
+            else
+                Citizen.Wait(1000)
+            end
+        end
+    end)    
+end
+
+
+RegisterCommand("teamlives", function()
+    DrawTeamlives()
+end)

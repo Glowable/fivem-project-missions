@@ -2,6 +2,7 @@ local NPC = { x = -2962.72, y = 483.09, z = 15.7, rotation = 268, NetworkSync = 
 
 
 RegisterCommand("startcayomis", function()
+    print("mission started")
     TriggerEvent("glow:startcayo")
 
 end)
@@ -33,6 +34,7 @@ end)
 
 RegisterNetEvent("glow:arrivelsia")
 AddEventHandler("glow:arrivelsia", function()
+    print("awaiting player input")
     local e_key = 38
     while true do
         Citizen.Wait(1)
