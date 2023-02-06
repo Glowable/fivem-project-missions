@@ -5,5 +5,6 @@ client_scripts {
     "functions/scenes.lua",
     "functions/functions.lua",
     "functions/scaleforms.lua",
-    "functions/entity.lua"
+    "functions/entity.lua",
+    "functions/cutopen.lua"
 } 
