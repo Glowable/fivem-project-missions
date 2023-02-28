@@ -1,0 +1,10 @@
+RegisterCommand("startsumo", function()
+    startZone()
+    disableKeys()
+end)
+
+RegisterCommand("explodevehicle", function()
+    print("boom")
+    NetworkExplodeVehicle(GetVehiclePedIsIn(PlayerPedId(), false), true, true)
+    SetEntityHealth(GetPlayerPed(-1), 0)
+end)

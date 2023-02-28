@@ -21,6 +21,17 @@
         "IsZero": false
       },
       "heading": 206.282013
+    },
+    {
+      "name": "maze bank",
+      "coordinates": {
+        "X": -74.53196,
+        "Y": -815.7286,
+        "Z": 326.1753,
+        "IsNormalized": false,
+        "IsZero": false
+      },
+      "heading": 241.134689
     }
   ],
   "blips": [

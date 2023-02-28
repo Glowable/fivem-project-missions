@@ -225,6 +225,7 @@ RegisterCommand("car", function(source, args)
 	end
 
     SetModelAsNoLongerNeeded(vehicleName)
+    
 end, false)
 
 RegisterCommand("helicopter", function(source, args)

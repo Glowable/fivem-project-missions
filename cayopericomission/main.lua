@@ -7,6 +7,8 @@ RegisterCommand("startcayomis", function()
 
 end)
 
+
+
 RegisterNetEvent("glow:startcayo")
 AddEventHandler("glow:startcayo", function()
     TriggerEvent("mt:missiontext", "Go to ~y~Los Santos International Airport", 500000)
