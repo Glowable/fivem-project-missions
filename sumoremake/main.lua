@@ -1,7 +1,6 @@
 RegisterCommand("startsumo", function()
     startZone()
     disableKeys()
-    spawnAbilties()
 end)
 
 RegisterCommand("explodevehicle", function()

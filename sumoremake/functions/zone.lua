@@ -19,7 +19,6 @@ function startZone()
             NetworkExplodeVehicle(GetVehiclePedIsIn(PlayerPedId(), false), true, true)
         end
     end
-
 end
 
 function disableKeys()
