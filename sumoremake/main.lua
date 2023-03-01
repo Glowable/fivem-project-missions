@@ -1,6 +1,7 @@
 RegisterCommand("startsumo", function()
     startZone()
     disableKeys()
+    TriggerEvent("sumo:welcomevl")
 end)
 
 RegisterCommand("explodevehicle", function()

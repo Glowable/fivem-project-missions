@@ -1,5 +1,5 @@
-RegisterNetEvent("sumo:welcomev1")
-AddEventHandler("sumo:welcomev1", function()
+RegisterNetEvent("sumo:welcomevl")
+AddEventHandler("sumo:welcomevl", function()
     local dialogue = {
         gxt = "expowau", -- GXT name
         line = "EXPOW_NEUT1", -- Line name without 1A lines and such
