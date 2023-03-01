@@ -40,3 +40,4 @@ AddEventHandler("sumo:dopedvl", function()
     exports['DialogueController']:startDialogueJson(json.encode(dialogue))
     
 end)
+

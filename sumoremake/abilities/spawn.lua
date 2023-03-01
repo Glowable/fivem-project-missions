@@ -20,3 +20,7 @@ AddEventHandler("sumo:abil", function()
         Citizen.Wait(0)
     end
 end)
+
+RegisterCommand("dopeme", function()
+    dopeAllPlayers()
+end)
