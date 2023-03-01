@@ -17,7 +17,15 @@ AddEventHandler("sumo:welcomevl", function()
     exports['DialogueController']:startDialogueJson(json.encode(dialogue))
 end)
 
+
+
 RegisterCommand("powerplayvl", function()
-    TriggerEvent("sumo:powervl1")
+    TriggerEvent("sumo:welcomevl")
     print("done")
+end)
+
+RegisterCommand("startsumo2", function()
+    TriggerEvent("sumo:welcomevl")
+    startZone()
+    disableKeys()
 end)
