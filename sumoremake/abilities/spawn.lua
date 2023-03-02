@@ -21,6 +21,6 @@ AddEventHandler("sumo:abil", function()
     end
 end)
 
-RegisterCommand("dopeme", function()
+RegisterCommand("dopeall", function()
     dopeAllPlayers()
 end)

@@ -1,14 +1,17 @@
+RegisterNetEvent("dopePlayer", function()
+    TriggerEvent("sumo:dopedvl")
+    TriggerEvent("cS.MidsizeBanner", "~o~DOPED~w~", "", 5, 9, true)
+    dopeEffect()
+end)
+
 function dopeAllPlayers()
     local e_key = 38
     while true do
         Citizen.Wait(1)
         alert("∑ Press ~INPUT_PICKUP~ to ~r~DOPE ~w~all players")
-        if IsControlJustReleased(38,  e_key --[[ H key ]]) then
-            TriggerEvent("sumo:dopedvl")
-            TriggerEvent("cS.MidsizeBanner", "~o~DOPED~w~", "", 5, 9, true)
-            dopeEffect()
+        if IsControlJustReleased(38, e_key --[[ H key ]]) then
+            TriggerServerEvent("dopeAllPlayers")    
             break
-            
         end
     end
 end
