@@ -1,6 +1,6 @@
 RegisterNetEvent("dopePlayer", function()
     TriggerEvent("sumo:dopedvl")
-    TriggerEvent("cS.MidsizeBanner", "~o~DOPED~w~", "", 5, 9, true)
+    ActivateIcon(3, "doped", "You Got Doped", true, 1)
     dopeEffect()
 end)
 
