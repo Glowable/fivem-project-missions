@@ -30,9 +30,15 @@ end)
 
 RegisterCommand("startsumo", function()
     TriggerEvent("sumo:welcomevl")
+    TriggerEvent("sumo:scaleformstart")
     startZone()
     disableKeys()
+end)
 
+RegisterCommand("startsumo2", function()
+    TriggerEvent("sumo:welcomevl")
+    startZone()
+    disableKeys()
 end)
 
 RegisterCommand("explodevehicle", function()

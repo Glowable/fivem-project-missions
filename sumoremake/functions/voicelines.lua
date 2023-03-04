@@ -2,7 +2,7 @@ RegisterNetEvent("sumo:welcomevl")
 AddEventHandler("sumo:welcomevl", function()
     local dialogue = {
         gxt = "expowau", -- GXT name
-        line = "EXPOW_NEUT1", -- Line name without 1A lines and such
+        line = "EXPOW_NEUT9", -- Line name without 1A lines and such
         speakers = {
             ["2"] = "EXEC1_POWERANN", -- Speakers, required, based on SL. needs to be accurate
         },
@@ -24,8 +24,3 @@ RegisterCommand("powerplayvl", function()
     print("done")
 end)
 
-RegisterCommand("startsumo2", function()
-    TriggerEvent("sumo:welcomevl")
-    startZone()
-    disableKeys()
-end)

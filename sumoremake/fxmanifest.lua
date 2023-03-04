@@ -8,7 +8,8 @@ client_scripts {
     "functions/spawn.lua",
     "functions/voicelines.lua",
     "abilities/doped.lua",
-    "abilities/spawn.lua"
+    "abilities/spawn.lua",
+    "scaleforms/modestart.lua",
 } 
  
 server_script 'abilities/dopedserver.lua'
