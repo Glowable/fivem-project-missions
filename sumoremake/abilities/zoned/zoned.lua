@@ -1,5 +1,5 @@
 RegisterNetEvent("zonePlayer", function()
-    TriggerEvent("sumo:dopedvl")
+    TriggerEvent("sumo:zonevl")
     ActivateIcon(5, "zoned", "You are in the Zone", true, 1)
     zoneEffect()
 end)
