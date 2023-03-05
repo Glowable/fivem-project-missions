@@ -37,7 +37,7 @@ RegisterCommand("startsumo", function()
 end)
 
 RegisterCommand("startsumo2", function()
-    InitPowerPlay()
+    TriggerServerEvent("spawnAllPlayers")
 end)
 
 RegisterCommand("explodevehicle", function()

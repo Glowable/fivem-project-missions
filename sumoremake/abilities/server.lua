@@ -7,3 +7,8 @@ RegisterNetEvent("zoneAllPlayers", function()
     local src = source
     TriggerClientEvent("zonePlayer", -1)
 end)
+
+RegisterNetEvent("spawnAllPlayers", function()
+    local src = source
+    TriggerClientEvent("spawnPlayer", -1)
+end)
