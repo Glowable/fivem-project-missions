@@ -4,6 +4,10 @@ RegisterNetEvent("zonePlayer", function()
     zoneEffect()
 end)
 
+RegisterCommand("zoneplayer", function()
+    zoneAllPlayers()
+end)
+
 function zoneAllPlayers()
     local e_key = 38
     while true do

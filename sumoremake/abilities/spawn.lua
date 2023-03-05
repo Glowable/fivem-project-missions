@@ -7,7 +7,7 @@ AddEventHandler("sumo:abil", function()
     SetBlipColour(blip1, 2)
     SetBlipRoute(blip1, false)
 
-    pickup2 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 219.48, 7905.74, 18.00, 180.1, 180.1, 210.1)
+    pickup2 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 222.19, 7418.6, 19.45, 180.1, 180.1, 210.1)
     local blip2 = AddBlipForCoord(219.48, 7405.74, 17.46)
     SetBlipSprite(blip2, 464)
     SetBlipColour(blip2, 2)
