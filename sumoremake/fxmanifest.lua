@@ -7,6 +7,7 @@ client_scripts {
     "functions/zone.lua",
     "functions/spawn.lua",
     "functions/voicelines.lua",
+    "abilities/spawn.lua",
     "abilities/doped/doped.lua",
     "abilities/zoned/zoned.lua",
     "scaleforms/modestart.lua",

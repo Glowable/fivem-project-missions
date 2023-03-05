@@ -1,6 +1,6 @@
 RegisterNetEvent("sumo:abil")
 AddEventHandler("sumo:abil", function()
-
+    print("abilities spawned")
     pickup1 = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_CRATE_FIXED_INCAR"), 219.48, 7405.74, 17.46, 180.1, 180.1, 210.1)
     local blip1 = AddBlipForCoord(219.48, 7405.74, 17.46)
     SetBlipSprite(blip1, 469)
