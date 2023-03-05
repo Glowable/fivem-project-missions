@@ -19,9 +19,11 @@ end
 ---the actual effect
 function zoneEffect()
     print("started zone effect")
-    AnimpostfxPlay("DrugsTrevorClownsFightIn", 5000, false)
+    EnableSpecialAbility(PlayerPedId(), true)
+    AnimpostfxPlay("SwitchSceneMichael", 5000, false)
     Citizen.Wait(10000)
     AnimpostfxStopAll()
+    SpecialAbilityDeactivate(PlayerPedId())
     print("stopped zone effect")
 end
 
