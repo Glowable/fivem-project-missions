@@ -1,6 +1,5 @@
 function startZone()
-    disableKeys()
-    setSpawn()
+
     print("done")
     local ped = PlayerPedId()
     local blip = AddBlipForRadius(200.89, 7396.32, 14.08, 110.0) -- need to have .0
@@ -16,7 +15,7 @@ function startZone()
         if dist < 200.6 then
             inArea = true
             print("reached explosion height")
-            NetworkExplodeVehicle(GetVehiclePedIsIn(PlayerPedId(), false), true, true)
+            --NetworkExplodeVehicle(GetVehiclePedIsIn(PlayerPedId(), false), true, true)
         end
     end
 end

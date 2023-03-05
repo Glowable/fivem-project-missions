@@ -36,7 +36,6 @@ AddEventHandler("sumo:scaleformstart", function()
       scaleforms.bg:Draw2D()
       scaleforms.fg:Draw2D()
       scaleforms.main:Draw2D()
-      HideHudAndRadarThisFrame()
   
       if GetGameTimer() > endTime then
         running = false
