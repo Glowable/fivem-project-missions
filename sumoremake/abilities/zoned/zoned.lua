@@ -20,15 +20,19 @@ function zoneAllPlayers()
     end
 end
 
+RegisterCommand("testspecialability", function()
+    SpecialAbilityDeactivateFast(PlayerId(), 1)
+end)
+
 ---the actual effect
 function zoneEffect()
-    print("started zone effect")
+    Citizen.Wait(500)
+    AnimpostfxPlay('SwitchOpenMichaelIn', 500, true)
     SetSpecialAbility(PlayerId(), 2, 1)
-    AnimpostfxPlay("SwitchOpenMichaelIn", 5000, false)
+    SpecialAbilityActivate(PlayerId(), 1)
     Citizen.Wait(10000)
     AnimpostfxStopAll()
     SpecialAbilityDeactivateFast(PlayerId(), 1)
-    print("stopped zone effect")
 end
 
 RegisterNetEvent("sumo:zonevl")
