@@ -12,7 +12,4 @@ client_scripts {
     "scaleforms/modestart.lua",
 } 
  
-server_scripts {
-    "abilities/doped/dopedserver.lua",
-    "abilities/zoned/zonedserver.lua",
-} 
+server_script 'abilities/server.lua'
