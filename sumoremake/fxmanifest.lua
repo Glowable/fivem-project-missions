@@ -5,7 +5,8 @@ description 'Sumo Remake'
 client_scripts {
     "main.lua",
     "functions/zone.lua",
-    "functions/spawn.lua",
+    "spawn/spawn.lua",
+    "spawn/spawnplayer.lua",
     "functions/voicelines.lua",
     "abilities/spawn.lua",
     "abilities/doped/doped.lua",
