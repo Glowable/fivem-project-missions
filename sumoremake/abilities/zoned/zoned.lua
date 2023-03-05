@@ -16,6 +16,7 @@ function zoneAllPlayers()
     end
 end
 
+---the actual effect
 function zoneEffect()
     print("started zone effect")
     AnimpostfxPlay("DrugsTrevorClownsFightIn", 5000, false)
