@@ -1,4 +1,5 @@
-function startZone()
+RegisterNetEvent("sumo:startzone")
+AddEventHandler("sumo:startzone", function()
 
     print("done")
     local ped = PlayerPedId()
@@ -18,7 +19,7 @@ function startZone()
             --NetworkExplodeVehicle(GetVehiclePedIsIn(PlayerPedId(), false), true, true)
         end
     end
-end
+end)
 
 function disableKeys()
     DisableControlAction(2, 75, true)

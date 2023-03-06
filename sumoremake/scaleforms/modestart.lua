@@ -1,3 +1,11 @@
+RegisterCommand("testingbigmessage", function()
+    TriggerEvent('cS.banner', "~o~SUMO X POWERPLAY~s~", "Map 1", 5, true)
+end)
+
+RegisterCommand("testingbigmessagee", function()
+    TriggerEvent("cS.GameFeed", "_title", "_subtitle", "_textblock", "v_73_fib01_txd", "xj_v_fibscreen", false, 7, true)
+end)
+
 
 RegisterNetEvent("sumo:scaleformstart")
 AddEventHandler("sumo:scaleformstart", function()

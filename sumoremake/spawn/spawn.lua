@@ -39,3 +39,8 @@ end)
 RegisterCommand("dopeall", function()
     dopeAllPlayers()
 end)
+
+RegisterCommand("respawnabil", function()
+    TriggerEvent("sumo:abil")
+end)
+
