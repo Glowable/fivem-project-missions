@@ -1,5 +1,4 @@
-
-
+--[[
 function alert(msg) 
     SetTextComponentFormat("STRING")
     AddTextComponentString(msg)
