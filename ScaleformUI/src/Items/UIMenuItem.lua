@@ -41,7 +41,8 @@ function UIMenuItem:ItemData(data)
     end
 end
 
-function UIMenuItem:LabelFont(fontTable)
+-- not supported on Lobby and Pause menu yet
+function UIMenuItem:LabelFont(fontTable) 
     if fontTable == nil then
         return self._labelFont
     else
@@ -287,13 +288,13 @@ function UIMenuItem:AddSidePanel(sidePanel)
     if sidePanel() == "UIMissionDetailsPanel" then
         sidePanel:SetParentItem(self)
         self.SidePanel = sidePanel
-		if self.ParentMenu ~= nil and self.ParentMenu:Visible() then
+        if self.ParentMenu ~= nil and self.ParentMenu:Visible() then
             ScaleformUI.Scaleforms._ui:CallFunction("ADD_SIDE_PANEL_TO_ITEM", false, IndexOf(self.ParentMenu.Items, self) - 1, 0, sidePanel.PanelSide, sidePanel.TitleType, sidePanel.Title, sidePanel.TitleColor, sidePanel.TextureDict, sidePanel.TextureName)
         end
     elseif sidePanel() == "UIVehicleColorPickerPanel" then
         sidePanel:SetParentItem(self)
         self.SidePanel = sidePanel
-		if self.ParentMenu ~= nil and self.ParentMenu:Visible() then
+        if self.ParentMenu ~= nil and self.ParentMenu:Visible() then
             ScaleformUI.Scaleforms._ui:CallFunction("ADD_SIDE_PANEL_TO_ITEM", false, IndexOf(self.ParentMenu.Items, self) - 1, 1, sidePanel.PanelSide, sidePanel.TitleType, sidePanel.Title, sidePanel.TitleColor)
         end
     end

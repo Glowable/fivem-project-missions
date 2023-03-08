@@ -722,19 +722,14 @@ AddEventHandler("sumo:openvehiclemenu", function()
 	local vehicles     = { "Nero Custom", "Zentorno", "Cyclone", "Liberator" }
     local colorListItem = UIMenuListItem.New("Vehicle", vehicles, 0,
         "Select your vehicle!")
+
+	colorListItem.OnListChanged = function(menu, item, newindex)
+		local name = item.Items[newIndex]
+		if item == colorListItem then
+		  print("New Index: " .. newindex, "Name: " .. item.Items[newindex])
+		end
+	end
     heistselect:AddItem(colorListItem)
-
-    colorListItem.OnListChanged = function(menu, item, newindex)
-        local name = item:IndexToItem(newindex)
-        if name  == "Zentorno" then
-            print("zentorno")
-        elseif name == "Nero Custom" then
-			print("nerocustom")
-		elseif name == "Cyclone" then
-			print("cyclone")
-        end
-    end
-
 	local upgrade = UIMenuItem.New("Upgrade Vehicle", "Coming Later")
 	heistselect:AddItem(upgrade)
 
@@ -793,7 +788,264 @@ AddEventHandler("sumo:openvehiclemenu", function()
 	heistselect:Visible(true)
 end)
 
+RegisterCommand("hellooo", function()
+	TriggerEvent("sumo:openvehiclemenuu")
+end)
 
+RegisterNetEvent("sumo:openvehiclemenuu")
+AddEventHandler("sumo:openvehiclemenuu", function()
+    local txd = CreateRuntimeTxd("scaleformui")
+    local dui = CreateDui("https://i.imgur.com/mH0Y65C.gif", 288, 160)
+    CreateRuntimeTextureFromDuiHandle(txd, "sidepanel", GetDuiHandle(dui))
+
+    local exampleMenu = UIMenu.New("ScaleformUI UI", "ScaleformUI SHOWCASE", 50, 50, true, nil, nil, true)
+    exampleMenu:MaxItemsOnScreen(7)
+    exampleMenu:BuildAsync(true) -- set to false to build in a sync way (might freeze game for a couple ms for high N of items in menus)
+    exampleMenu:BuildingAnimation(MenuBuildingAnimation.LEFT_RIGHT)
+    exampleMenu:AnimationType(MenuAnimationType.CUBIC_INOUT)
+    pool:Add(exampleMenu)
+
+    local ketchupItem = UIMenuCheckboxItem.New("Scrolling animation enabled?", animEnabled, 1,
+        "Do you wish to enable the scrolling animation?")
+    ketchupItem:LeftBadge(BadgeStyle.STAR)
+    local sidePanel = UIMissionDetailsPanel.New(1, "Side Panel", 6, true, "scaleformui", "sidepanel")
+    local detailItem1 = UIMenuFreemodeDetailsItem.New("Left Label", "Right Label", false, BadgeStyle.BRIEFCASE,
+        Colours.HUD_COLOUR_FREEMODE)
+    local detailItem2 = UIMenuFreemodeDetailsItem.New("Left Label", "Right Label", false, BadgeStyle.STAR,
+        Colours.HUD_COLOUR_GOLD)
+    local detailItem3 = UIMenuFreemodeDetailsItem.New("Left Label", "Right Label", false, BadgeStyle.ARMOR,
+        Colours.HUD_COLOUR_PURPLE)
+    local detailItem4 = UIMenuFreemodeDetailsItem.New("Left Label", "Right Label", false, BadgeStyle.BRAND_DILETTANTE,
+        Colours.HUD_COLOUR_GREEN)
+    local detailItem5 = UIMenuFreemodeDetailsItem.New("Left Label", "Right Label", false, BadgeStyle.COUNTRY_GERMANY,
+        Colours.HUD_COLOUR_WHITE, true)
+    local detailItem6 = UIMenuFreemodeDetailsItem.New("Left Label", "Right Label", true)
+    local detailItem7 = UIMenuFreemodeDetailsItem.New("Left Label", "Right Label", false)
+
+    sidePanel:AddItem(detailItem1)
+    sidePanel:AddItem(detailItem2)
+    sidePanel:AddItem(detailItem3)
+    sidePanel:AddItem(detailItem4)
+    sidePanel:AddItem(detailItem5)
+    sidePanel:AddItem(detailItem6)
+    sidePanel:AddItem(detailItem7)
+
+    ketchupItem:AddSidePanel(sidePanel)
+    exampleMenu:AddItem(ketchupItem)
+
+    local animations = {}
+    for k, v in pairs(MenuAnimationType) do
+        -- table.insert(animations, k) -- Instead of this , use it like below (learn more here : https://springrts.com/wiki/Lua_Performance#TEST_12:_Adding_Table_Items_.28table.insert_vs._.5B_.5D.29)
+        animations[#animations + 1] = k
+    end
+
+    local scrollingItem = UIMenuListItem.New("Choose the scrolling animation", animations, exampleMenu:AnimationType(),
+        "~BLIP_BARBER~ ~BLIP_INFO_ICON~ ~BLIP_TANK~ ~BLIP_OFFICE~ ~BLIP_CRIM_DRUGS~ ~BLIP_WAYPOINT~ ~INPUTGROUP_MOVE~~n~You can use Blips and Inputs in description as you prefer!~n~⚠ 🐌 ❤️ 🥺 💪🏻 You can use Emojis too!"
+        , Colours.HUD_COLOUR_FREEMODE_DARK, Colours.HUD_COLOUR_FREEMODE)
+    scrollingItem:BlinkDescription(true)
+    exampleMenu:AddItem(scrollingItem)
+
+    local cookItem = UIMenuItem.New("Cook!", "Cook the dish with the appropiate ingredients and ketchup.")
+    exampleMenu:AddItem(cookItem)
+    cookItem:RightBadge(BadgeStyle.STAR)
+    cookItem:LeftBadge(BadgeStyle.STAR)
+
+    exampleMenu.OnItemSelect = function(menu, item, index)
+        if (item == cookItem) then
+            ScaleformUI.Notifications:ShowNotification("We're cooking Jessie!")
+        end
+        ScaleformUI.Notifications:ShowNotification("Item with label '" .. item:Label() .. "' was clicked.")
+    end
+
+    local colorItem = UIMenuItem.New("UIMenuItem with Colors", "~b~Look!!~r~I can be colored ~y~too!!~w~", 21, 24)
+    colorItem:LeftBadge(BadgeStyle.STAR)
+    exampleMenu:AddItem(colorItem)
+    local sidePanelVehicleColor = UIVehicleColorPickerPanel.New(1, "ColorPicker", 6)
+    colorItem:AddSidePanel(sidePanelVehicleColor)
+
+    local dynamicValue = 0
+    local dynamicListItem = UIMenuDynamicListItem.New("Dynamic List Item",
+        "Try pressing ~INPUT_FRONTEND_LEFT~ or ~INPUT_FRONTEND_RIGHT~", tostring(dynamicValue),
+        function(item, direction)
+            if (direction == "left") then
+                dynamicValue = dynamicValue - 1
+            elseif (direction == "right") then
+                dynamicValue = dynamicValue + 1
+            end
+            return tostring(dynamicValue)
+        end)
+    exampleMenu:AddItem(dynamicListItem)
+    dynamicListItem:LeftBadge(BadgeStyle.STAR)
+
+    local seperatorItem1 = UIMenuSeperatorItem.New("Separator (Jumped)", true)
+    local seperatorItem2 = UIMenuSeperatorItem.New("Separator (not Jumped)", false)
+    exampleMenu:AddItem(seperatorItem1)
+    exampleMenu:AddItem(seperatorItem2)
+
+    local foodsList     = { "Banana", "Apple", "Pizza", "Quartilicious" }
+    local colorListItem = UIMenuListItem.New("Colored ListItem.. Really?", foodsList, 0,
+        "~BLIP_BARBER~ ~BLIP_INFO_ICON~ ~BLIP_TANK~ ~BLIP_OFFICE~ ~BLIP_CRIM_DRUGS~ ~BLIP_WAYPOINT~ ~INPUTGROUP_MOVE~~n~You can use Blips and Inputs in description as you prefer!"
+        , 21, 24)
+    exampleMenu:AddItem(colorListItem)
+
+    local sliderItem = UIMenuSliderItem.New("Slider Item!", 100, 5, 50, false, "Cool!")
+    exampleMenu:AddItem(sliderItem)
+    local progressItem = UIMenuProgressItem.New("Slider Progress Item", 10, 5)
+    exampleMenu:AddItem(progressItem)
+
+    local listPanelItem1 = UIMenuItem.New("Change Color", "It can be whatever item you want it to be")
+    local colorPanel = UIMenuColorPanel.New("Color Panel Example", 1, 0)
+    local colorPanel2 = UIMenuColorPanel.New("Custom Palette Example", 1, 0,
+        { "HUD_COLOUR_GREEN", "HUD_COLOUR_RED", "HUD_COLOUR_FREEMODE", "HUD_COLOUR_PURPLE", "HUD_COLOUR_TREVOR" })
+    exampleMenu:AddItem(listPanelItem1)
+    listPanelItem1:AddPanel(colorPanel)
+    listPanelItem1:AddPanel(colorPanel2)
+
+    local listPanelItem2 = UIMenuItem.New("Change Percentage", "It can be whatever item you want it to be")
+    local percentagePanel = UIMenuPercentagePanel.New("Percentage Panel Example", "0%", "100%")
+    exampleMenu:AddItem(listPanelItem2)
+    listPanelItem2:AddPanel(percentagePanel)
+
+    local listPanelItem3 = UIMenuItem.New("Change Grid Position", "It can be whatever item you want it to be")
+    local gridPanel = UIMenuGridPanel.New("Up", "Left", "Right", "Down", vector2(0.5, 0.5), 0)
+    local horizontalGridPanel = UIMenuGridPanel.New("", "Left", "Right", "", vector2(0.5, 0.5), 1)
+    exampleMenu:AddItem(listPanelItem3)
+    listPanelItem3:AddPanel(gridPanel)
+    listPanelItem3:AddPanel(horizontalGridPanel)
+
+    local listPanelItem4 = UIMenuListItem.New("Look at Statistics", { "Example", "example2" }, 0)
+    local statisticsPanel = UIMenuStatisticsPanel.New()
+    statisticsPanel:AddStatistic("Look at this!", 10.0)
+    statisticsPanel:AddStatistic("I'm a statistic too!", 50.0)
+    statisticsPanel:AddStatistic("Am i not?!", 100.0)
+    exampleMenu:AddItem(listPanelItem4)
+    listPanelItem4:AddPanel(statisticsPanel)
+
+    --[[
+        2 ways to add submenus.. 
+        - the old way => local submenu = pool:AddSubMenu(parent, ...)
+        - way.New => 
+            local subMenu = UIMenu.New()
+            parent:AddSubMenu(subMenu, itemText, itemDescription, offset, KeepBanner)
+    ]]
+    local windowSubmenu = UIMenu.New("Windows Submenu", "Windows Subtitle")
+    exampleMenu:AddSubMenu(windowSubmenu, "Windows Menu", "separate descriptions yeeeeah", nil, true)
+    local heritageWindow = UIMenuHeritageWindow.New(0, 0)
+    local detailsWindow = UIMenuDetailsWindow.New("Parents resemblance", "Dad:", "Mom:", true, {})
+    windowSubmenu:AddWindow(heritageWindow)
+    windowSubmenu:AddWindow(detailsWindow)
+    local momNames = { "Hannah", "Audrey", "Jasmine", "Giselle", "Amelia", "Isabella", "Zoe", "Ava", "Camilla", "Violet",
+        "Sophia", "Eveline", "Nicole", "Ashley", "Grace", "Brianna", "Natalie", "Olivia", "Elizabeth", "Charlotte",
+        "Emma", "Misty" }
+    local dadNames = { "Benjamin", "Daniel", "Joshua", "Noah", "Andrew", "Joan", "Alex", "Isaac", "Evan", "Ethan",
+        "Vincent", "Angel", "Diego", "Adrian", "Gabriel", "Michael", "Santiago", "Kevin", "Louis", "Samuel", "Anthony",
+        "Claude", "Niko", "John" }
+
+    local momListItem        = UIMenuListItem.New("Mom", momNames, 0)
+    local dadListItem        = UIMenuListItem.New("Dad", dadNames, 0)
+    local heritageSliderItem = UIMenuSliderItem.New("Heritage Slider", 100, 5, 0, true, "This is Useful on heritage")
+    windowSubmenu:AddItem(momListItem)
+    windowSubmenu:AddItem(dadListItem)
+    windowSubmenu:AddItem(heritageSliderItem)
+
+    detailsWindow.DetailMid = "Dad: " .. heritageSliderItem:Index() .. "%"
+    detailsWindow.DetailBottom = "Mom: " .. (100 - heritageSliderItem:Index()) .. "%"
+    detailsWindow.DetailStats = {
+        {
+            Percentage = 100,
+            HudColor = 6
+        },
+        {
+            Percentage = 0,
+            HudColor = 50
+        }
+    }
+
+    detailsWindow:UpdateStatsToWheel()
+
+    exampleMenu.OnMenuChanged = function(old, new, type)
+        if type == "opened" then
+            print("Menu opened!")
+        elseif type == "closed" then
+            print("Menu closed!")
+        elseif type == "backwards" then
+            print("Menu going backwards!")
+        elseif type == "forwards" then
+            print("Menu going forwards!")
+        end
+    end
+
+    ketchupItem.OnCheckboxChanged = function(menu, item, checked)
+        sidePanel:UpdatePanelTitle(tostring(checked))
+        menu:AnimationEnabled(checked)
+        scrollingItem:Enabled(checked)
+        if checked then
+            scrollingItem:LeftBadge(BadgeStyle.NONE)
+        else
+            scrollingItem:LeftBadge(1)
+        end
+    end
+
+    scrollingItem.OnListChanged = function(menu, item, index)
+        menu:AnimationType(index)
+    end
+
+    colorPanel.OnColorPanelChanged = function(menu, item, newindex)
+        print(newindex)
+        local message = "ColorPanel index => " .. newindex + 1
+        AddTextEntry("ScaleformUINotification", message)
+        BeginTextCommandThefeedPost("ScaleformUINotification")
+        EndTextCommandThefeedPostTicker(false, true)
+    end
+
+    colorPanel2.OnColorPanelChanged = function(menu, item, newindex)
+        local message = "ColorPanel2 index => " .. newindex + 1
+        AddTextEntry("ScaleformUINotification", message)
+        BeginTextCommandThefeedPost("ScaleformUINotification")
+        EndTextCommandThefeedPostTicker(false, true)
+    end
+
+    percentagePanel.OnPercentagePanelChange = function(menu, item, newpercentage)
+        local message = "PercentagePanel => " .. newpercentage
+        ScaleformUI.Notifications:ShowSubtitle(message)
+    end
+
+    gridPanel.OnGridPanelChanged = function(menu, item, newposition)
+        local message = "PercentagePanel => " .. newposition
+        ScaleformUI.Notifications:ShowSubtitle(message)
+    end
+
+    horizontalGridPanel.OnGridPanelChanged = function(menu, item, newposition)
+        local message = "PercentagePanel => " .. newposition
+        ScaleformUI.Notifications:ShowSubtitle(message)
+    end
+
+    sidePanelVehicleColor.PickerSelect = function(menu, item, newindex)
+        local message = "ColorPanel index => " .. newindex + 1
+        ScaleformUI.Notifications:ShowNotification(message)
+    end
+
+    local MomIndex = 0
+    local DadIndex = 0
+
+    windowSubmenu.OnListChange = function(menu, item, newindex)
+        if (item == momListItem) then
+            MomIndex = newindex
+        elseif (item == dadListItem) then
+            DadIndex = newindex
+        end
+        heritageWindow:Index(MomIndex, DadIndex)
+    end
+
+    heritageSliderItem.OnSliderChanged = function(menu, item, value)
+        detailsWindow.DetailStats[1].Percentage = 100 - value
+        detailsWindow.DetailStats[2].Percentage = value
+        detailsWindow:UpdateStatsToWheel()
+        detailsWindow:UpdateLabels("Parents resemblance", "Dad: " .. value .. "%", "Mom: " .. (100 - value) .. "%")
+    end
+
+    exampleMenu:Visible(true)
+end)
 
 function CreatePauseMenu()
 	local pauseMenuExample = TabView.New("ScaleformUI LUA", "THE LUA API", GetPlayerName(PlayerId()), "String middle", "String bottom")
