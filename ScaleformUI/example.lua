@@ -719,16 +719,22 @@ AddEventHandler("sumo:openvehiclemenu", function()
 			parent:AddSubMenu(subMenu, itemText, itemDescription, offset, KeepBanner)
 	]]
 
-	local vehicles     = { "Nero Custom", "Zentorno", "Cyclone", "Liberator" }
+	local vehicles     = { "Nero Custom", "Zentorno", "Cyclone", "Kamacho" }
     local colorListItem = UIMenuListItem.New("Vehicle", vehicles, 0,
         "Select your vehicle!")
 
-	colorListItem.OnListChanged = function(menu, item, newindex)
-		local name = item.Items[newIndex]
-		if item == colorListItem then
-		  print("New Index: " .. newindex, "Name: " .. item.Items[newindex])
-		end
-	end
+    colorListItem.OnListChanged = function(menu, item, newindex)
+        local name = item:IndexToItem(newindex)
+        if name  == "Zentorno" then
+            TriggerEvent("sumo:spawnzentorno")
+        elseif name == "Nero Custom" then
+            TriggerEvent("sumo:spawnnerocustom")
+        elseif name == "Cyclone" then
+            TriggerEvent("sumo:spawncyclone")
+		elseif name == "Kamacho" then
+            TriggerEvent("sumo:spawnkamacho")
+        end
+    end
     heistselect:AddItem(colorListItem)
 	local upgrade = UIMenuItem.New("Upgrade Vehicle", "Coming Later")
 	heistselect:AddItem(upgrade)

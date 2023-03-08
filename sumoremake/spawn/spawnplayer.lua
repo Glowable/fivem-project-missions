@@ -33,6 +33,8 @@ end)
 
 RegisterNetEvent("sumo:startsequence")
 AddEventHandler("sumo:startsequence", function()
+    TriggerEvent("sumo:openvehiclemenu")
+    Citizen.Wait(30000)
     TriggerEvent("sumo:abil")
     TriggerEvent("sumo:welcomevl")
     TriggerEvent("sumo:startzone")
