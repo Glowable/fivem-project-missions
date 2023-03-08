@@ -12,7 +12,7 @@ client_scripts {
     "abilities/doped/doped.lua",
     "abilities/zoned/zoned.lua",
     "scaleforms/modestart.lua",
-    "vehicle/vehicleselect.lua",
+    "menu/vehicleselect.lua",
 } 
  
 server_script 'abilities/server.lua'

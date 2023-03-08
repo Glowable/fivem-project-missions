@@ -688,25 +688,20 @@ end)
 
 
 ---
-RegisterNetEvent("glow:selectheist")
-AddEventHandler("glow:selectheist", function()
+
+
+RegisterNetEvent("sumo:openvehiclemenu")
+AddEventHandler("sumo:openvehiclemenu", function()
 	local txd = CreateRuntimeTxd("scaleformui")
 	local dui = CreateDui("https://i.imgur.com/mH0Y65C.gif", 288, 160)
 	CreateRuntimeTextureFromDuiHandle(txd, "sidepanel", GetDuiHandle(dui))
 	
-	local heistselect = UIMenu.New("Heists", "Heist Selector", 50, 50, true, nil, nil, true)
+	local heistselect = UIMenu.New("Lobby", "VEHICLE SELECTION", 50, 50, true, nil, nil, true)
 	heistselect:MaxItemsOnScreen(7)
-	heistselect:BuildAsync(true) -- set to false to build in a sync way (might freeze game for a couple ms for high N of items in menus)
-	heistselect:BuildingAnimation(MenuBuildingAnimation.LEFT_RIGHT)
-	heistselect:AnimationType(MenuAnimationType.CUBIC_INOUT)
+	heistselect:BuildAsync(false) -- set to false to build in a sync way (might freeze game for a couple ms for high N of items in menus)
 	pool:Add(heistselect)
 
 
-	local animations = {}
-	for k,v in pairs(MenuAnimationType) do
-		-- table.insert(animations, k) -- Instead of this , use it like below (learn more here : https://springrts.com/wiki/Lua_Performance#TEST_12:_Adding_Table_Items_.28table.insert_vs._.5B_.5D.29)
-		animations[#animations + 1] = k
-	end
 
 
 
@@ -724,38 +719,53 @@ AddEventHandler("glow:selectheist", function()
 			parent:AddSubMenu(subMenu, itemText, itemDescription, offset, KeepBanner)
 	]]
 
-	local missle = UIMenu.New("The Fleeca Bank", "Features")
-	heistselect:AddSubMenu(missle, "The Fleeca Bank", "Setups & Heist", nil, true)
+	local vehicles     = { "Nero Custom", "Zentorno", "Cyclone", "Liberator" }
+    local colorListItem = UIMenuListItem.New("Vehicle", vehicles, 0,
+        "Select your vehicle!")
+    heistselect:AddItem(colorListItem)
+
+    colorListItem.OnListChanged = function(menu, item, newindex)
+        local name = item:IndexToItem(newindex)
+        if name  == "Zentorno" then
+            print("zentorno")
+        elseif name == "Nero Custom" then
+			print("nerocustom")
+		elseif name == "Cyclone" then
+			print("cyclone")
+        end
+    end
+
+	local upgrade = UIMenuItem.New("Upgrade Vehicle", "Coming Later")
+	heistselect:AddItem(upgrade)
 
 
-	local fleeca1 = UIMenuItem.New("Setup: Kuruma", "Retrieve the kuruma")
-	missle:AddItem(fleeca1)
+	upgrade.Activated = function(menu)
+		if Activated then
+			alert("Coming Eventually")
+		else
+			alert("Coming Eventually")
+		end
+	end
 
-	local fleeca2 = UIMenuItem.New("The Fleeca Job", "Take down the Fleeca franchise. The driver controls the crowd. The hacker gets box 167 from the vault. Then everyone gets out and gets away in the Kuruma.")
-	missle:AddItem(fleeca2)
+	local seperatorItem1 = UIMenuSeperatorItem.New("~g~---------------------------------", true)
+	heistselect:AddItem(seperatorItem1)
 
-	local pacific = UIMenu.New("The Pacific Standard Bank", "Setups & Heist")
-	heistselect:AddSubMenu(pacific, "The Pacific Standard Heist", "Setups & Heist", nil, true)
+	local ketchupItem = UIMenuCheckboxItem.New("Ready", animEnabled, 1, "This does nothing right now")
+	heistselect:AddItem(ketchupItem)
 
-	local pacific1 = UIMenuItem.New("Pacific Standard - Vans", "Get hold of a Post OP van fitted with a transponder that can be programmed to disable the Pacific Standard dye packs. You'll have to photograph a few vans in the field to identify the right one.")
-	pacific:AddItem(pacific1)
 
-	local pacific2 = UIMenuItem.New("Pacific Standard - Signal", "Bring the transponder to Avi Schwartzman, a signal expert, so he can tune it to the right frequency for the Pacific Standard dye packs. Avi's a fugitive hiding out in North Chumash")
-	pacific:AddItem(pacific2)
+	ketchupItem.OnCheckboxChanged = function(menu, item, checked)
+		if checked then
+			print("ready")
+		else
+			print("notready")
+		end
+	end
 
-	local pacific3 = UIMenuItem.New("Pacific Standard - Hack", "Borrow a hacking rig from a rival high-end heist crew in Vinewood. Take out the guards, swap the setup of their van and into ours, distract the crew, and bring it to Paige.")
-	pacific:AddItem(pacific3)
 
-	local pacific4 = UIMenuItem.New("Pacific Standard - Convoy", "Hijack a Merryweather convoy in Blaine County to get thermal charges to use on the security doors at the Pacific Standard.")
-	pacific:AddItem(pacific4)
 
-	local pacific5 = UIMenuItem.New("Pacific Standard - Bikes", "Source the the getaway vehicles for the Pacific Standard job. Take four state-of-the-art sports bikes from The Lost MC Clubhouse in East Los Santos and store them near the bank.")
-	pacific:AddItem(pacific5)
 
-	local pacific6 = UIMenuItem.New("The Pacific Standard Job", "Clear out the flagship branch of the Pacific Standard Bank on Vinewood Blvd. Bust into the bank, control the crowd, crack the vault, pull out what you can, and make a getaway on the bikes")
-	pacific:AddItem(pacific6)
-
-	fleeca1.Activated = function(menu)
+	--[[fleeca1.Activated = function(menu)
 		if Activated then
 			print("worked")
 			TriggerEvent('glow:fleeca1')
@@ -766,29 +776,6 @@ AddEventHandler("glow:selectheist", function()
 	end
 
 
-
-
-	fleeca1.Activated = function(menu)
-		if Activated then
-			print("worked")
-			TriggerEvent('glow:fleeca1')
-		else
-			print("worked?")
-			TriggerEvent('glow:fleeca1')
-		end
-	end
-
-
-
-	fleeca2.Activated = function(menu)
-		if Activated then
-			print("worked")
-			TriggerEvent('glow:fleecastartheist')
-		else
-			print("worked?")
-			TriggerEvent('glow:fleecastartheist')
-		end
-	end
 
 	pacific6.Activated = function(menu)
 		if Activated then
@@ -798,7 +785,7 @@ AddEventHandler("glow:selectheist", function()
 			print("worked?")
 			TriggerEvent("glow:startpac")
 		end
-	end
+	end]]
 
 
 
