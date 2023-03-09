@@ -13,7 +13,8 @@ client_scripts {
     "gtaisland/abilities/zoned/zoned.lua",
     "gtaisland/scaleforms/modestart.lua",
     "gtaisland/menu/vehicleselect.lua",
-    "gtaisland/menu/vehicleselect.lua",
+    "gtaisland/menu/menu.lua",
+    "@ScaleformUI_Lua/ScaleformUI.lua"
 
 } 
  
