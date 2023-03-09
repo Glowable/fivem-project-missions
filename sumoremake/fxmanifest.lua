@@ -3,16 +3,18 @@ game 'gta5'
 description 'Sumo Remake'
  
 client_scripts {
-    "main.lua",
-    "functions/zone.lua",
-    "spawn/spawn.lua",
-    "spawn/spawnplayer.lua",
-    "functions/voicelines.lua",
-    "abilities/spawn.lua",
-    "abilities/doped/doped.lua",
-    "abilities/zoned/zoned.lua",
-    "scaleforms/modestart.lua",
-    "menu/vehicleselect.lua",
+    "gtaisland/main.lua",
+    "gtaisland/functions/zone.lua",
+    "gtaisland/spawn/spawn.lua",
+    "gtaisland/spawn/spawnplayer.lua",
+    "gtaisland/functions/voicelines.lua",
+    "gtaisland/abilities/spawn.lua",
+    "gtaislandabilities/doped/doped.lua",
+    "gtaisland/abilities/zoned/zoned.lua",
+    "gtaisland/scaleforms/modestart.lua",
+    "gtaisland/menu/vehicleselect.lua",
+    "gtaisland/menu/vehicleselect.lua",
+
 } 
  
-server_script 'abilities/server.lua'
+server_script 'gtaisland/abilities/server.lua'
