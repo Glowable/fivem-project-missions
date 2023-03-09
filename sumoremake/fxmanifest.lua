@@ -9,7 +9,7 @@ client_scripts {
     "gtaisland/spawn/spawnplayer.lua",
     "gtaisland/functions/voicelines.lua",
     "gtaisland/abilities/spawn.lua",
-    "gtaislandabilities/doped/doped.lua",
+    "gtaisland/abilities/doped/doped.lua",
     "gtaisland/abilities/zoned/zoned.lua",
     "gtaisland/scaleforms/modestart.lua",
     "gtaisland/menu/vehicleselect.lua",
