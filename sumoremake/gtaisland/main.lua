@@ -36,7 +36,7 @@ RegisterCommand("startsumo", function()
     disableKeys()
 end)
 
-RegisterCommand("startsumo2lol", function()
+RegisterCommand("startsumo2", function()
     TriggerServerEvent("spawnAllPlayers")
 end)
 
