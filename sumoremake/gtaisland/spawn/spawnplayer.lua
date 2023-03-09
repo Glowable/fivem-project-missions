@@ -21,13 +21,18 @@ function spawnEffect()
     print("stuffhappenshere1")
 end
 
+AddTextEntry("CUSTOMLOADSTR", "Loading Game")
+
 RegisterNetEvent("sumo:clouds")
 AddEventHandler("sumo:clouds", function()
     Citizen.Wait(9500)
     StartPlayerSwitch(PlayerPedId(), PlayerPedId(), 255, 1)
+    BeginTextCommandBusyspinnerOn("CUSTOMLOADSTR")
+    EndTextCommandBusyspinnerOn(4)
     Citizen.Wait(9000)
     TriggerEvent("sumo:cam1")
     Citizen.Wait(2000) 
+    BusyspinnerOff()
     StopPlayerSwitch()
 end)
 
