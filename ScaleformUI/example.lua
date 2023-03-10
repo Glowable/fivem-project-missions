@@ -86,6 +86,7 @@ end)
 local pool = MenuPool.New()
 local animEnabled = true
 local timerBarPool = TimerBarPool.New()
+local timerBarPool = TimerBarPool.New()
 
 RegisterCommand("testing123", function()
 	ShowMissionPassedMessage("hello", 100)
@@ -686,7 +687,22 @@ AddEventHandler("glow:interactionmenu", function()
 	exampleMenu:Visible(true)
 end)
 
-
+RegisterCommand("testtimingbar", function()
+	print("showing")
+    local pos = GetEntityCoords(PlayerPedId(), true)
+    --type, position, scale, distance, color, placeOnGround, bobUpDown, rotate, faceCamera, checkZ
+    local marker = Marker.New(1, pos, vector3(2, 2, 2), 100.0, { R = 0, G = 100, B = 50, A = 255 }, true, false, false,
+        false, true)
+    -- example for working timerBars.. you can disable them by setting :Enabled(false).. to hide and show them while drawing :)
+    local textBar = TextTimerBar.New("Label", "Caption")
+    textBar:LabelFont(Font.CHALET_COMPRIME_COLOGNE)
+    textBar:CaptionFont(Font.MONOSPACE)
+    local progrBar = ProgressTimerBar.New("Label")
+    progrBar:LabelFont(Font.PRICEDOWN)
+    progrBar:Percentage(0.5) -- goes from 0.0 to 1.0
+    timerBarPool:AddBar(textBar)
+    timerBarPool:AddBar(progrBar)
+end)
 ---
 
 RegisterNetEvent("sumo:openvehiclemenu")

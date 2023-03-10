@@ -5,7 +5,7 @@ function setSpawn()
 end
 
 RegisterNetEvent("spawnPlayer", function()
-    TriggerEvent("cS.PopupWarning", "~y~Loading~s~", "You are now loading into a Sumo Game. Please wait.", "GlowTM", 10, true)
+    TriggerEvent("cS.PopupWarning", "~y~Loading~s~", "You are now loading into a Sumo Game.\nPlease wait.", "GlowTM", 10, true)
 
 
     TriggerEvent("sumo:clouds")
@@ -82,6 +82,7 @@ end)
 
 RegisterNetEvent("sumo:spawnplayercar")
 AddEventHandler("sumo:spawnplayercar", function()
+    FreezeEntityPosition(GetVehiclePedIsIn(PlayerPedId(), false), true)
     local vehicleName = 'adder'
 
     if not IsModelInCdimage(vehicleName) or not IsModelAVehicle(vehicleName) then

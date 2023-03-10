@@ -40,9 +40,20 @@ AddEventHandler("sumo:abil", function()
     end
 end)
 
-RegisterCommand("dopeall", function()
-    dopeAllPlayers()
+RegisterCommand("starttimer", function()
+    local time = 15
+    while true do
+        time = time - 1
+        if time == 0 then
+            print("BOOOMMM")
+            return
+        else
+        print(time)
+        end
+        Wait(1000)
+    end
 end)
+
 
 RegisterCommand("respawnabil", function()
     TriggerEvent("sumo:abil")
