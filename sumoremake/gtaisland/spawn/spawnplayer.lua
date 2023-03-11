@@ -38,7 +38,9 @@ end)
 
 RegisterNetEvent("sumo:startsequence")
 AddEventHandler("sumo:startsequence", function()
+    TriggerEvent("sumo:explode")
     TriggerEvent("sumo:openvehiclemenu")
+    TriggerEvent("mt:missiontext", "Select your ~b~Vehicle", 100000)
     Citizen.Wait(30000)
     TriggerEvent("sumo:abil")
     TriggerEvent("sumo:welcomevl")
@@ -49,6 +51,7 @@ AddEventHandler("sumo:startsequence", function()
     Citizen.Wait(5000)
     TriggerEvent("sumo:scaleformstart")
     InitPowerPlay()
+    TriggerEvent("mt:missiontext", "Throw the ~r~Enemy Players~w~ off the Island", 100000)
     FreezeEntityPosition(GetVehiclePedIsIn(PlayerPedId(), false), false)
 end)
 
@@ -80,9 +83,24 @@ AddEventHandler("sumo:cam1", function()
     TriggerEvent("sumo:startsequence")
 end)
 
+RegisterNetEvent("sumo:explode")
+AddEventHandler("sumo:explode", function(text, time)
+    print("explode event started")
+    while true do
+        Citizen.Wait(1000)
+        local playerPed = GetPlayerPed(-1)
+        local playerCoords = GetEntityCoords(playerPed)
+
+        -- Check if player is below z level 0
+        if playerCoords.z < 1.5 then
+            -- Kill the player and display a message
+            NetworkExplodeVehicle(GetVehiclePedIsIn(PlayerPedId(), false), true, true)
+        end
+    end
+end)
+
 RegisterNetEvent("sumo:spawnplayercar")
 AddEventHandler("sumo:spawnplayercar", function()
-    FreezeEntityPosition(GetVehiclePedIsIn(PlayerPedId(), false), true)
     local vehicleName = 'adder'
 
     if not IsModelInCdimage(vehicleName) or not IsModelAVehicle(vehicleName) then
@@ -113,6 +131,8 @@ AddEventHandler("sumo:spawnplayercar", function()
 	end
 
     SetModelAsNoLongerNeeded(vehicleName)
+
+    FreezeEntityPosition(GetVehiclePedIsIn(PlayerPedId(), false), true)
     
 end, false)
 

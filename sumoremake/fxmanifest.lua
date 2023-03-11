@@ -15,10 +15,14 @@ client_scripts {
     "gtaisland/scaleforms/modestart.lua",
     "gtaisland/menu/vehicleselect.lua",
     "gtaisland/menu/menu.lua",
+    "gtaisland/liv/client.lua",
+    "gtaisland/liv/entity.lua",
+
 
 } 
  
 
 server_script {
 	'gtaisland/abilities/server.lua',
+    'gtaisland/liv/server.lua',
 }
