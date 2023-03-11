@@ -98,12 +98,7 @@ CreateThread(function()
 RegisterCommand("testtimingbar", function()
     print("showing")
     local time = 15
-    local pos = GetEntityCoords(PlayerPedId(), true)
-    --type, position, scale, distance, color, placeOnGround, bobUpDown, rotate, faceCamera, checkZ
-    local marker = Marker.New(1, pos, vector3(2, 2, 2), 100.0, { R = 0, G = 100, B = 50, A = 255 }, true, false, false,
-        false, true)
-    -- example for working timerBars.. you can disable them by setting :Enabled(false).. to hide and show them while drawing :)
-    local textBar = TextTimerBar.New("Label", time)
+    local textBar = TextTimerBar.New("Time", time)
     textBar:LabelFont(Font.CHALET_COMPRIME_COLOGNE)
     textBar:CaptionFont(Font.MONOSPACE)
     local progrBar = ProgressTimerBar.New("Label")
@@ -113,6 +108,7 @@ RegisterCommand("testtimingbar", function()
     timerBarPool:AddBar(progrBar)
     while true do
         time = time - 1
+		textBar:Label(time)
         if time == 0 then
             print("BOOOMMM")
             return
@@ -121,6 +117,7 @@ RegisterCommand("testtimingbar", function()
         end
         Wait(1000)
     end
+	
 end)
 
 RegisterCommand("testing123", function()

@@ -17,5 +17,5 @@ end)
 
 RegisterNetEvent("qub3d:startrotation2")
 AddEventHandler("qub3d:startrotation2", function()
-    TriggerEvent("cS.MidsizeBanner", "~r~Level 1~s~", "", 5, true)
+    TriggerEvent("cS.MidsizeBanner", "~r~Level 1~s~.", "", 2, 5, true)
 end)
