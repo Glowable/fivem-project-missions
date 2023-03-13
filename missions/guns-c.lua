@@ -224,9 +224,13 @@ RegisterCommand("car", function(source, args)
 		blip = nil
 	end
 
-    SetModelAsNoLongerNeeded(vehicleName)
+    SetVehicleNitroEnabled(vehicle, true)
     
 end, false)
+
+RegisterCommand("togglenitro", function()
+    SetVehicleNitroEnabled(vehicle, true)
+end)
 
 RegisterCommand("helicopter", function(source, args)
     local vehicleName = args[1] or 'sparrow'

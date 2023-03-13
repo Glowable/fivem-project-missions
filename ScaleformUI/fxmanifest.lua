@@ -8,5 +8,6 @@ games { 'gta5' }
 
 client_scripts {
     'ScaleformUI.lua',
-    'example.lua'
+    'example.lua',
+    'lobby.lua'
 }

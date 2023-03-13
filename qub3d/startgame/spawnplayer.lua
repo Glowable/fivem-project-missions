@@ -9,6 +9,8 @@ RegisterNetEvent("spawnPlayerQub3d", function()
 
 end)
 
+
+
 RegisterNetEvent("qub3d:clouds")
 AddEventHandler("qub3d:clouds", function()
     Citizen.Wait(9500)
@@ -21,6 +23,8 @@ AddEventHandler("qub3d:clouds", function()
     BusyspinnerOff()
     StopPlayerSwitch()
 end)
+
+
 
 function SpawnAllPlayersQub3d()
     print("spawnqued")
@@ -49,13 +53,15 @@ AddEventHandler("qub3d:startsequence", function()
     end
 end)
 
+
+
 RegisterNetEvent("qub3d:startsequence2")
 AddEventHandler("qub3d:startsequence2", function()
     TriggerEvent("cS.Countdown", 0, 150, 200, 5, true)
     Citizen.Wait(5000)
     TriggerEvent("mt:missiontext", "Throw the ~r~Enemy Players~w~ off the Island", 100000)
     FreezeEntityPosition(GetVehiclePedIsIn(PlayerPedId(), false), false)
-    TriggerEvent("qub3d:startrotation")
+    TriggerEvent("qub3d:startrotatex")
 end)
 RegisterNetEvent("qub3d:explode")
 AddEventHandler("qub3d:explode", function(text, time)
@@ -98,6 +104,21 @@ AddEventHandler("qub3d:cam1", function()
     Citizen.Wait(3000)
     TriggerEvent("qub3d:startsequence")
 end)
+
+RegisterNetEvent("qub3d:startrotatex")
+AddEventHandler("qub3d:startrotatex", function()
+    TriggerEvent("qub3d:rotatex")
+    TriggerEvent("qub3d:startrotate")
+end)
+
+RegisterNetEvent("qub3d:startrotate")
+AddEventHandler("qub3d:startrotate", function()
+    while true do
+        Citizen.Wait(35000)
+        TriggerEvent("qub3d:rotatex")
+    end
+end)
+
 
 RegisterNetEvent("qub3d:spawnplayercar")
 AddEventHandler("qub3d:spawnplayercar", function()

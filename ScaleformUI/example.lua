@@ -98,26 +98,26 @@ CreateThread(function()
 RegisterCommand("testtimingbar", function()
     print("showing")
     local time = 15
-    local textBar = TextTimerBar.New("Time", time)
-    textBar:LabelFont(Font.CHALET_COMPRIME_COLOGNE)
-    textBar:CaptionFont(Font.MONOSPACE)
+    local textBar = TextTimerBar.New("Time", "00:" .. tostring(time))
     local progrBar = ProgressTimerBar.New("Label")
-    progrBar:LabelFont(Font.PRICEDOWN)
-    progrBar:Percentage(0.5) -- goes from 0.0 to 1.0
     timerBarPool:AddBar(textBar)
-    timerBarPool:AddBar(progrBar)
+
     while true do
         time = time - 1
-		textBar:Label(time)
+		if time >= 10 then 
+			textBar:Caption("00:" .. time)
+		else 
+			textBar:Caption("00:0" .. time)
+		end
+
         if time == 0 then
             print("BOOOMMM")
-            return
+            break
         else
         print(time)
         end
         Wait(1000)
-    end
-	
+    end	
 end)
 
 RegisterCommand("testing123", function()
@@ -1551,6 +1551,11 @@ RegisterCommand("lobbymenu", function()
 		lobbyMenu:Visible(true)
 end)
 
+RegisterCommand("missionselect", function()
+	CreateMissionSelectorMenu()
+end)
+
+
 local MissionSelectorVisible = false
 function CreateMissionSelectorMenu()
 
@@ -1562,7 +1567,7 @@ function CreateMissionSelectorMenu()
 	end
 
 	local txd = CreateRuntimeTxd("test");
-	local _paneldui = CreateDui("https://i.imgur.com/mH0Y65C.gif", 288, 160);
+	local _paneldui = CreateDui("https://cdn.discordapp.com/attachments/1063889807085940847/1084563602909970482/image.png", 288, 160);
 	CreateRuntimeTextureFromDuiHandle(txd, "panelbackground", GetDuiHandle(_paneldui));
 
 	ScaleformUI.Scaleforms.JobMissionSelector:SetTitle("MISSION SELECTOR")
@@ -1625,21 +1630,21 @@ function CreateMissionSelectorMenu()
 	ScaleformUI.Scaleforms.JobMissionSelector:AddCard(card5)
 
 	ScaleformUI.Scaleforms.JobMissionSelector.Buttons = {
-		JobSelectionButton.New("Button 1", "description test", {
+		JobSelectionButton.New("test", "description test", {
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.GTAOMission, Colours.HUD_COLOUR_FREEMODE),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.Deathmatch, Colours.HUD_COLOUR_GOLD),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.RaceFinish, Colours.HUD_COLOUR_PURPLE),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.GTAOSurvival, Colours.HUD_COLOUR_GREEN),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.TeamDeathmatch, Colours.HUD_COLOUR_WHITE, true),
 		}),
-		JobSelectionButton.New("Button 2", "description test", {
+		JobSelectionButton.New("test", "description test", {
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.GTAOMission, Colours.HUD_COLOUR_FREEMODE),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.Deathmatch, Colours.HUD_COLOUR_GOLD),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.RaceFinish, Colours.HUD_COLOUR_PURPLE),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.GTAOSurvival, Colours.HUD_COLOUR_GREEN),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.TeamDeathmatch, Colours.HUD_COLOUR_WHITE, true),
 		}),
-		JobSelectionButton.New("Button 3", "description test", {
+		JobSelectionButton.New("test", "description test", {
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.GTAOMission, Colours.HUD_COLOUR_FREEMODE),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.Deathmatch, Colours.HUD_COLOUR_GOLD),
 			MissionDetailsItem.New("Left Label", "Right Label", false, JobIcon.RaceFinish, Colours.HUD_COLOUR_PURPLE),
@@ -1707,6 +1712,110 @@ AddEventHandler("qub3d:openvehiclemenu", function()
             TriggerEvent("qub3d:spawncyclone")
 		elseif name == "Kamacho" then
             TriggerEvent("qub3d:spawnkamacho")
+        end
+    end
+    heistselect:AddItem(colorListItem)
+	local upgrade = UIMenuItem.New("Upgrade Vehicle", "Coming Later")
+	heistselect:AddItem(upgrade)
+
+
+	upgrade.Activated = function(menu)
+		if Activated then
+			alert("Coming Eventually")
+		else
+			alert("Coming Eventually")
+		end
+	end
+
+	local seperatorItem1 = UIMenuSeperatorItem.New("~g~---------------------------------", true)
+	heistselect:AddItem(seperatorItem1)
+
+	local ketchupItem = UIMenuCheckboxItem.New("Ready", animEnabled, 1, "This does nothing right now")
+	heistselect:AddItem(ketchupItem)
+
+
+	ketchupItem.OnCheckboxChanged = function(menu, item, checked)
+		if checked then
+			print("ready")
+		else
+			print("notready")
+		end
+	end
+
+
+
+
+	--[[fleeca1.Activated = function(menu)
+		if Activated then
+			print("worked")
+			TriggerEvent('glow:fleeca1')
+		else
+			print("worked?")
+			TriggerEvent('glow:fleeca1')
+		end
+	end
+
+
+
+	pacific6.Activated = function(menu)
+		if Activated then
+			print("worked")
+			TriggerEvent("glow:startpac")
+		else
+			print("worked?")
+			TriggerEvent("glow:startpac")
+		end
+	end]]
+
+
+
+	
+	heistselect:Visible(true)
+end)
+
+RegisterNetEvent("qub3d:openvehiclemenu2")
+AddEventHandler("qub3d:openvehiclemenu2", function()
+	local txd = CreateRuntimeTxd("scaleformui")
+	local dui = CreateDui("https://i.imgur.com/mH0Y65C.gif", 288, 160)
+	CreateRuntimeTextureFromDuiHandle(txd, "sidepanel", GetDuiHandle(dui))
+	
+	local heistselect = UIMenu.New("Lobby", "VEHICLE SELECTION", 50, 50, true, nil, nil, true)
+	heistselect:MaxItemsOnScreen(7)
+	heistselect:BuildAsync(false) -- set to false to build in a sync way (might freeze game for a couple ms for high N of items in menus)
+	pool:Add(heistselect)
+
+
+
+
+
+
+
+
+
+
+
+	--[[
+		2 ways to add submenus.. 
+		- the old way => local submenu = pool:AddSubMenu(parent, ...)
+		- way.New => 
+			local subMenu = UIMenu.New()
+			parent:AddSubMenu(subMenu, itemText, itemDescription, offset, KeepBanner)
+	]]
+
+	local vehicles     = { "Nero Custom", "Zentorno", "Cyclone", "Kamacho" }
+    local colorListItem = UIMenuListItem.New("Vehicle", vehicles, 0,
+        "Select your vehicle!")
+
+    colorListItem.OnListChanged = function(menu, item, newindex)
+        local name = item:IndexToItem(newindex)
+        if name  == "Zentorno" then
+            TriggerEvent("qub3d:spawnzentorno2")
+        elseif name == "Nero Custom" then
+            TriggerEvent("qub3d:spawnnerocustom2")
+        elseif name == "Cyclone" then
+            TriggerEvent("qub3d:spawncyclone2")
+		elseif name == "Kamacho" then
+            TriggerEvent("qub3d:spawnkamacho2")
         end
     end
     heistselect:AddItem(colorListItem)

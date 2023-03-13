@@ -25,9 +25,9 @@ local function makeSettings()
     return {
         alphas = {},
         colors = {},
-        healthColor = false,
+        healthColor = true,
         toggles = {},
-        wantedLevel = false
+        wantedLevel = true
     }
 end
 
@@ -91,9 +91,10 @@ function updatePlayerNames()
             -- nearby checks are primarily to prevent a lot of LOS checks
             if distance < 250 and HasEntityClearLosToEntity(PlayerPedId(), ped, 17) then
                 SetMpGamerTagVisibility(tag, gtComponent.GAMER_NAME, true)
+                SetMpGamerTagVisibility(tag, gtComponent.WANTED_STARS, true)
                 SetMpGamerTagVisibility(tag, gtComponent.healthArmour, IsPlayerTargettingEntity(PlayerId(), ped))
                 SetMpGamerTagVisibility(tag, gtComponent.AUDIO_ICON, NetworkIsPlayerTalking(i))
-
+                SetMpGamerTagAlpha(tag, gtComponent.WANTED_STARS, 255)
                 SetMpGamerTagAlpha(tag, gtComponent.AUDIO_ICON, 255)
                 SetMpGamerTagAlpha(tag, gtComponent.healthArmour, 255)
 

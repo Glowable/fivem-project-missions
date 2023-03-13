@@ -60,6 +60,8 @@ local deathMessages = {
     "GG!",
     "YOU DIED!",
     "YOU SUCK!",
+    "LOL!",
+    "OBLITERATED"
 }
 
 Citizen.CreateThread(function()
@@ -74,8 +76,8 @@ Citizen.CreateThread(function()
             local message = deathMessages[math.random(1, #deathMessages)]
             
             -- Display death message and screen effect to player
-            TriggerEvent('cS.banner', "~r~" .. message .. "~s~", "Player " .. GetPlayerName(PlayerId()) .. " has died.", 3, true)
-            Citizen.Wait(10000)
+            TriggerEvent('cS.banner', "~p~" .. message .. "~s~", "Player " .. GetPlayerName(PlayerId()) .. " has died.", 3, true)
+            Citizen.Wait(5000)
         end
     end
 end)
